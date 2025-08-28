@@ -1,4 +1,4 @@
-/*
+﻿/*
 * For modders: Copy this file into your own project if you wish to use this API.
 */
 #pragma once
@@ -6,10 +6,9 @@
 #include <functional>
 #include <queue>
 #include <stdint.h>
-#include <string>
 #include <iostream>
 
-typedef std::string PrismaView;
+typedef uint64_t PrismaView;
 
 namespace PRISMA_UI_API
 {
@@ -23,38 +22,45 @@ namespace PRISMA_UI_API
 		V1
 	};
 
+	typedef void (*OnDomReadyCallback)(PrismaView view);
+	typedef void (*JSCallback)(const char* result);
+	typedef void (*JSListenerCallback)(const char* argument);
+
 	// PrismaUI modder interface v1
 	class IVPrismaUI1
 	{
 	public:
-		// Create view. Initial directory of "htmlPath" is "Skyrim Special Edition/Data/PrismaUI/views/".
-		virtual PrismaView CreateView(std::string htmlPath, std::function<void(PrismaView)> onDomReadyCallback = nullptr) noexcept = 0;
+		// Create view.
+		virtual PrismaView CreateView(const char* htmlPath, OnDomReadyCallback onDomReadyCallback = nullptr) noexcept = 0;
 
-		// Send JavaScript code to Web UI. Accepts callback with return value at second argument.
-		virtual void Invoke(PrismaView view, std::string script, std::function<void(std::string)> callback = nullptr) noexcept = 0;
+		// Send JS code to UI.
+		virtual void Invoke(PrismaView view, const char* script, JSCallback callback = nullptr) noexcept = 0;
 
-		// Register JavaScript listener for view. Receives one argument in a callback.
-		virtual void RegisterJSListener(PrismaView view, std::string fnName, std::function<void(std::string)> callback) noexcept = 0;
+		// Call JS function through JS Interop API (best performance).
+		virtual void InteropCall(PrismaView view, const char* functionName, const char* argument) noexcept = 0;
+
+		// Register JS listener.
+		virtual void RegisterJSListener(PrismaView view, const char* functionName, JSListenerCallback callback) noexcept = 0;
 
 		// Returns true if view has focus.
 		virtual bool HasFocus(PrismaView view) noexcept = 0;
 
-		// Focus view (show cursor and open FocusMenu as Skyrim Menu).
+		// Set focus on view.
 		virtual bool Focus(PrismaView view, bool pauseGame = false) noexcept = 0;
 
-		// Unfocus view (hide cursor and disable FocusMenu).
+		// Remove focus from view.
 		virtual void Unfocus(PrismaView view) noexcept = 0;
 
-		// Get scrolling distance in pixels.
+		// Get scroll size in pixels.
 		virtual int GetScrollingPixelSize(PrismaView view) noexcept = 0;
 
-		// Set scrolling size in pixels. DEFAULT: 28
+		// Set scroll size in pixels.
 		virtual void SetScrollingPixelSize(PrismaView view, int pixelSize) noexcept = 0;
 
 		// Returns true if view exists.
 		virtual bool IsValid(PrismaView view) noexcept = 0;
 
-		// Totally remove view from memory and unfocus it.
+		// Completely destroy view.
 		virtual void Destroy(PrismaView view) noexcept = 0;
 	};
 

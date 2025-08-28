@@ -1,49 +1,63 @@
+
+
+
+// Ensure pch.h is included first for logger and SKSE types
+#include "pch.h"
 #include "PrismaUI_API.h"
-#include <keyhandler/keyhandler.h>
+#include "keyhandler/keyhandler.h"
 
-PRISMA_UI_API::IVPrismaUI1* PrismaUI;
 
+PRISMA_UI_API::IVPrismaUI1* PrismaUI =nullptr;
+static PrismaView view = 0;
+// Toggle the PrismaUI view on keypress
+static void TogglePrismaUIView() {
+    if (!PrismaUI) {
+        logger::critical("PrismaUI API pointer is null. Cannot toggle view.");
+        return;
+    }
+
+    logger::info("Current view value before toggle: '{}'", view);
+
+    constexpr const char* kViewPath = "PrismaUI-SkyrimNet-UI/index.html";
+    // Create the view once if not already created
+    if (!PrismaUI->IsValid(view)) {
+        logger::info("Creating PrismaUI view with path: '{}'.", kViewPath);
+        view = PrismaUI->CreateView(kViewPath, [](PrismaView v) {
+            logger::info("View DOM is ready {}", v);
+            PrismaUI->Focus(view, false);
+        });
+        if (!PrismaUI->IsValid(view)) {
+            logger::critical("Failed to create PrismaUI view. View handle is invalid.");
+            return;
+        }
+    }
+    auto hasFocus = PrismaUI->HasFocus(view);
+    if (!hasFocus) {
+        PrismaUI->InteropCall(view, "toggleSkyrimNetUIDiv", "show");
+        PrismaUI->Focus(view, false);
+        logger::info("Called InteropCall show to 'skyrimnet-ui' div.");
+    } else {
+        PrismaUI->Unfocus(view);
+        PrismaUI->InteropCall(view, "toggleSkyrimNetUIDiv", "hide");
+        logger::info("Called InteropCall hide to 'skyrimnet-ui' div.");
+
+    }
+}
+
+// SKSE message handler for plugin initialization
 static void SKSEMessageHandler(SKSE::MessagingInterface::Message* message)
 {
     switch (message->type) {
     case SKSE::MessagingInterface::kDataLoaded:
-        // 1. Initialize PrismaUI API
+        // Initialize PrismaUI API
         PrismaUI = static_cast<PRISMA_UI_API::IVPrismaUI1*>(PRISMA_UI_API::RequestPluginAPI(PRISMA_UI_API::InterfaceVersion::V1));
 
-        // 2. Create view and call "Invoke" method to send JavaScript code to view when DOM is ready.
-        PrismaView view = PrismaUI->CreateView("PrismaUI-Example-UI/index.html", [](PrismaView view) -> void {
-            // View DOM is ready then you can use Invoke here (make sure that your JS methods are available after DOM is ready).
-            logger::info("View DOM is ready {}", view);
-
-            PrismaUI->Invoke(view, "updateFocusLabel('No. But press F3 to focus!')");
-        });
-
-        // 3. Also you could to register JS listener to handling JS methods calls.
-        PrismaUI->RegisterJSListener(view, "sendDataToSKSE", [](std::string data) -> void {
-            logger::info("Received data from JS: {}", data);
-        });
-
-        // Next lines is custom KEY DOWN / KEY UP realisation which bases at "src/keyhandler".
+        // Register key event handler for toggling view
         KeyHandler::RegisterSink();
         KeyHandler* keyHandler = KeyHandler::GetSingleton();
-        const uint32_t TOGGLE_FOCUS_KEY = 0x3D; // F3 key
-        
-        // Press F3 to focus/unfocus view in-game.
-        KeyHandlerEvent toggleEventHandler = keyHandler->Register(TOGGLE_FOCUS_KEY, KeyEventType::KEY_DOWN, [view]() {
-            auto hasFocus = PrismaUI->HasFocus(view);
-            
-            if (!hasFocus) {
-                // Focus
-                if (PrismaUI->Focus(view)) {
-                    PrismaUI->Invoke(view, "updateFocusLabel('Yeah, it is focused! Press F3 again to unfocus.')");
-                }
-            }
-            else {
-                // Unfocus
-                PrismaUI->Unfocus(view);
-                PrismaUI->Invoke(view, "updateFocusLabel('Nah, it is not focused.')");
-            }
-        });
+        const uint32_t TOGGLE_FOCUS_KEY = 0x3E; // F4 key
+
+        KeyHandlerEvent toggleEventHandler = keyHandler->Register(TOGGLE_FOCUS_KEY, KeyEventType::KEY_DOWN, TogglePrismaUIView);
 
         // If you want to unregister the key event handlers:
         // keyHandler->Unregister(toggleEventHandler);
@@ -51,6 +65,8 @@ static void SKSEMessageHandler(SKSE::MessagingInterface::Message* message)
     }
 }
 
+
+// SKSE plugin entry point
 extern "C" DLLEXPORT bool SKSEAPI SKSEPlugin_Load(const SKSE::LoadInterface* a_skse)
 {
     REL::Module::reset();

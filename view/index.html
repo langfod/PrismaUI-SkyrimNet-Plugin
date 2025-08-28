@@ -1,56 +1,120 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your View</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SkyrimNet UI</title>
     <style>
-        * {
-            user-select: none;
-            font-family: sans-serif;
-        }
+      * {
+        user-select: none;
+        font-family: sans-serif;
+      }
 
-        .wrapper {
-            display: inline-block;
-            padding: 8px;
-            background-color: white;
-            border-radius: 8px;
-        }
-        
-        #focus-label {
-            color: red;
-        }
+      .wrapper {
+        display: inline-block;
+        padding: 1px;
+        background-color: white;
+        border-radius: 1px;
+        position: relative;
+        resize: none;
+        width: 1080px;
+        height: 1325px;
+      }
+
+      .resize-handle {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        width: 16px;
+        height: 16px;
+        background: rgba(0,0,0,0.2);
+        border-radius: 3px;
+        cursor: se-resize;
+        z-index: 10;
+        display: flex;
+        align-items: flex-end;
+        justify-content: flex-end;
+      }
+      .resize-handle:after {
+        content: '';
+        display: block;
+        width: 12px;
+        height: 12px;
+        border-right: 2px solid #888;
+        border-bottom: 2px solid #888;
+        border-radius: 2px;
+        margin: 2px;
+      }
     </style>
-</head>
-<body>
-    <div class="wrapper">
-        <div>
-            <span>Is focused:</span>
-            <span id="focus-label"></span>
-        </div>
-        <div>
-            <div>
-                <input id="data-input" type="text" placeholder="Type some data..." />
-                <button onclick="sendInputData()">Send Data to SKSE</button>
-            </div>
-            <span id="data-sent-label" style="display: none;">Data was successfully sent, check your plugin log file!</span>
-        </div>
-    </div>
-
     <script>
-        // Global function which we're going to trigger from SKSE plugin with Invoke().
-        window.updateFocusLabel = (data) => {
-            document.querySelector("#focus-label").textContent = data;
-        };
-
-        function sendInputData() {
-            const inputValue = document.querySelector("#data-input").value;
-
-            document.querySelector("#data-sent-label").style.display = 'inline';
-
-            // Sending data to SKSE plugin with registered "sendDataToSKSE" JS listener.
-            window.sendDataToSKSE(inputValue);
+      function toggleSkyrimNetUIDiv(action) {
+        const div = document.getElementById("skyrimnet-ui");
+        if (!div) return;
+        if (action === "show") {
+          div.style.display = "inline-block";
+        } else if (action === "hide") {
+          div.style.display = "none";
+        } else {
+          // fallback to toggle
+          div.style.display =
+            div.style.display === "none" ? "inline-block" : "none";
         }
+      }
+      // Resizing logic
+      window.addEventListener('DOMContentLoaded', function() {
+        const wrapper = document.getElementById('skyrimnet-ui');
+        const handle = document.createElement('div');
+        handle.className = 'resize-handle';
+        wrapper.appendChild(handle);
+
+        let isResizing = false;
+        let lastX = 0, lastY = 0;
+        let startWidth = 0, startHeight = 0;
+
+        handle.addEventListener('mousedown', function(e) {
+          e.preventDefault();
+          isResizing = true;
+          lastX = e.clientX;
+          lastY = e.clientY;
+          startWidth = wrapper.offsetWidth;
+          startHeight = wrapper.offsetHeight;
+          document.body.style.cursor = 'se-resize';
+        });
+
+        document.addEventListener('mousemove', function(e) {
+          if (!isResizing) return;
+          const dx = e.clientX - lastX;
+          const dy = e.clientY - lastY;
+          let newWidth = Math.max(200, startWidth + dx);
+          let newHeight = Math.max(200, startHeight + dy);
+          wrapper.style.width = newWidth + 'px';
+          wrapper.style.height = newHeight + 'px';
+          // Resize iframe too
+          const iframe = wrapper.querySelector('iframe');
+          if (iframe) {
+            iframe.style.width = (newWidth - 2) + 'px';
+            iframe.style.height = (newHeight - 2) + 'px';
+          }
+        });
+
+        document.addEventListener('mouseup', function(e) {
+          if (isResizing) {
+            isResizing = false;
+            document.body.style.cursor = '';
+          }
+        });
+      });
     </script>
-</body>
+  </head>
+  <body>
+    <div id="skyrimnet-ui" class="wrapper">
+      <iframe
+        src="http://localhost:8080"
+        style="border: none; border-radius: 1px; width: 100%; height: 100%;"
+        width="1078"
+        height="1323"
+      ></iframe>
+      <div class="resize-handle"></div>
+    </div>
+  </body>
 </html>

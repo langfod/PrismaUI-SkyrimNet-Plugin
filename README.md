@@ -1,3 +1,43 @@
+
+### Example to load the SkyrimNet WebUI inside Skyrim using PrismaUI
+
+
+Currently set to use F4 and hardcoded in main.cpp
+`const uint32_t TOGGLE_FOCUS_KEY = 0x3E; // F4 key`
+
+### to build:
+* run `xmake build`
+
+Currently a "debug" version is compiled. change `xmake.lua` (lines with comments of " -- debug")
+
+An archive file should be created in the "release" folder. This can be installed as a mod.
+
+### REQUIREMENTS:
+Also needed is "PrismaUI_1_0_0.zip" from https://github.com/PrismaUI-SKSE/PrismaUI-Wiki/releases
+
+Do NOT install this zip file.
+This zip needs to be extracted first.
+Install the archive from either the "INSTALL WITH MO2" or "DEBUG VERSION" folders as a normal mod.
+
+The folder "PUT FILES IN SKYRIM FOLDER" contain files that need to go in the game root folder.
+
+Rename (perhaps PrismUI-Ultralight) and install this folder as a normal mod in Vortex and set the type to "Engine Injector" to install in game folder.
+
+
+### Notes:
+in main.cpp
+`PrismaUI->Focus(view, true);` is supposed to pause the game and the game is supposed to unpaude when `Unfocus` is called. However, I had issues with this so it is left False.
+
+PrismaUI calls the html file that is in `views\index.html`. 
+Currently this just loads the SkyrimNet page using "localhost:8080" inside an iframe.
+It has some javascript for the hide/show functionality and an attempt at a resizing using a grab box at the corner of the window.
+
+
+
+original README follows:
+
+-----
+
 # PrismaUI SKSE Plugin Template
 
 This is a basic plugin template using PrismaUI and CommonLibSSE-NG.
