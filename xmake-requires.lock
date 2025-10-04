@@ -6,7 +6,7 @@
         ["cmake#31fecfc4"] = {
             repo = {
                 branch = "master",
-                commit = "26bdbe85b3fc169b40b34d2bae0af04a015e59a9",
+                commit = "bb9b6ecec712fedd52139420d7af944be1c22b25",
                 url = "https://github.com/xmake-io/xmake-repo.git"
             },
             version = "3.31.1"
@@ -30,7 +30,7 @@
         ["ninja#31fecfc4"] = {
             repo = {
                 branch = "master",
-                commit = "26bdbe85b3fc169b40b34d2bae0af04a015e59a9",
+                commit = "bb9b6ecec712fedd52139420d7af944be1c22b25",
                 url = "https://github.com/xmake-io/xmake-repo.git"
             },
             version = "1.12.1"

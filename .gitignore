@@ -12,3 +12,5 @@ vs*/
 # files
 *.zip
 /release
+/test_docs
+memory.json

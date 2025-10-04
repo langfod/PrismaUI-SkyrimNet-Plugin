@@ -1,5 +1,6 @@
-﻿/*
+/*
 * For modders: Copy this file into your own project if you wish to use this API.
+* This is the EXTENDED API with inspector support (requires newer PrismaUI).
 */
 #pragma once
 
@@ -8,14 +9,19 @@
 #include <stdint.h>
 #include <iostream>
 
+#ifndef WIN32_LEAN_AND_MEAN
+	#define WIN32_LEAN_AND_MEAN
+#endif
+#ifndef NOMINMAX
+	#define NOMINMAX
+#endif
+#include <windows.h>
+
 typedef uint64_t PrismaView;
 
 namespace PRISMA_UI_API
 {
 	constexpr const auto PrismaUIPluginName = "PrismaUI";
-
-	using PluginHandle = SKSE::PluginHandle;
-	using ActorHandle = RE::ActorHandle;
 
 	enum class InterfaceVersion : uint8_t
 	{
@@ -26,7 +32,7 @@ namespace PRISMA_UI_API
 	typedef void (*JSCallback)(const char* result);
 	typedef void (*JSListenerCallback)(const char* argument);
 
-	// PrismaUI modder interface v1
+	// PrismaUI modder interface v1 (with inspector support)
 	class IVPrismaUI1
 	{
 	public:
@@ -51,15 +57,6 @@ namespace PRISMA_UI_API
 		// Remove focus from view.
 		virtual void Unfocus(PrismaView view) noexcept = 0;
 
-		// Show a hidden view.
-		virtual void Show(PrismaView view) noexcept = 0;
-
-		// Hide a visible view.
-		virtual void Hide(PrismaView view) noexcept = 0;
-
-		// Returns true if view is hidden.
-		virtual bool IsHidden(PrismaView view) noexcept = 0;
-
 		// Get scroll size in pixels.
 		virtual int GetScrollingPixelSize(PrismaView view) noexcept = 0;
 
@@ -72,23 +69,44 @@ namespace PRISMA_UI_API
 		// Completely destroy view.
 		virtual void Destroy(PrismaView view) noexcept = 0;
 
+		// Get raw Ultralight View pointer for advanced operations (e.g., Inspector)
+		virtual void* GetUltralightView(PrismaView view) noexcept = 0;
+
+		// ========== INSPECTOR METHODS (requires newer PrismaUI) ==========
+
+		// Create an Inspector View for debugging (requires inspector assets)
+		// Note: This triggers inspector creation via ViewListener callback
+		// The inspector view is managed internally by PrismaUI
+		virtual void CreateInspectorView(PrismaView view) noexcept = 0;
+
+		// Show or hide the overlay inspector that PrismaUI renders
+		virtual void SetInspectorVisibility(PrismaView view, bool visible) noexcept = 0;
+
+		// Returns true when the PrismaUI-managed inspector overlay is visible
+		virtual bool IsInspectorVisible(PrismaView view) noexcept = 0;
+
+		// Configure on-screen placement (top-left position in pixels) and size for the inspector overlay
+		virtual void SetInspectorBounds(PrismaView view, float topLeftX, float topLeftY, uint32_t width, uint32_t height) noexcept = 0;
+
+		// Retrieve the raw Ultralight View pointer for the inspector overlay (nullptr when unavailable)
+		virtual void* GetInspectorView(PrismaView view) noexcept = 0;
+
+		// =================================================================
+
+		// Show the view.
+		virtual void Show(PrismaView view) noexcept = 0;
+		
+		// Hide the view.
+		virtual void Hide(PrismaView view) noexcept = 0;
+		
+		// Returns true if view is hidden.
+		virtual bool IsHidden(PrismaView view) noexcept = 0;
+
 		// Set view order.
 		virtual void SetOrder(PrismaView view, int order) noexcept = 0;
 
 		// Get view order.
 		virtual int GetOrder(PrismaView view) noexcept = 0;
-
-		// Create inspector view for debugging.
-		virtual void CreateInspectorView(PrismaView view) noexcept = 0;
-
-		// Show or hide the inspector overlay.
-		virtual void SetInspectorVisibility(PrismaView view, bool visible) noexcept = 0;
-
-		// Returns true if inspector is visible.
-		virtual bool IsInspectorVisible(PrismaView view) noexcept = 0;
-
-		// Set inspector window position and size.
-		virtual void SetInspectorBounds(PrismaView view, float topLeftX, float topLeftY, unsigned int width, unsigned int height) noexcept = 0;
 	};
 
 	typedef void* (*_RequestPluginAPI)(const InterfaceVersion interfaceVersion);

@@ -3,117 +3,46 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Security-Policy" content="media-src * blob:; font-src * blob:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' data:; object-src 'none'">
     <title>SkyrimNet UI</title>
-    <style>
-      * {
-        user-select: none;
-        font-family: sans-serif;
-      }
-
-      .wrapper {
-        display: inline-block;
-        padding: 1px;
-        background-color: white;
-        border-radius: 1px;
-        position: relative;
-        resize: none;
-        width: 1080px;
-        height: 1325px;
-      }
-
-      .resize-handle {
-        position: absolute;
-        right: 0;
-        bottom: 0;
-        width: 16px;
-        height: 16px;
-        background: rgba(0,0,0,0.2);
-        border-radius: 3px;
-        cursor: se-resize;
-        z-index: 10;
-        display: flex;
-        align-items: flex-end;
-        justify-content: flex-end;
-      }
-      .resize-handle:after {
-        content: '';
-        display: block;
-        width: 12px;
-        height: 12px;
-        border-right: 2px solid #888;
-        border-bottom: 2px solid #888;
-        border-radius: 2px;
-        margin: 2px;
-      }
-    </style>
-    <script>
-      function toggleSkyrimNetUIDiv(action) {
-        const div = document.getElementById("skyrimnet-ui");
-        if (!div) return;
-        if (action === "show") {
-          div.style.display = "inline-block";
-        } else if (action === "hide") {
-          div.style.display = "none";
-        } else {
-          // fallback to toggle
-          div.style.display =
-            div.style.display === "none" ? "inline-block" : "none";
-        }
-      }
-      // Resizing logic
-      window.addEventListener('DOMContentLoaded', function() {
-        const wrapper = document.getElementById('skyrimnet-ui');
-        const handle = document.createElement('div');
-        handle.className = 'resize-handle';
-        wrapper.appendChild(handle);
-
-        let isResizing = false;
-        let lastX = 0, lastY = 0;
-        let startWidth = 0, startHeight = 0;
-
-        handle.addEventListener('mousedown', function(e) {
-          e.preventDefault();
-          isResizing = true;
-          lastX = e.clientX;
-          lastY = e.clientY;
-          startWidth = wrapper.offsetWidth;
-          startHeight = wrapper.offsetHeight;
-          document.body.style.cursor = 'se-resize';
-        });
-
-        document.addEventListener('mousemove', function(e) {
-          if (!isResizing) return;
-          const dx = e.clientX - lastX;
-          const dy = e.clientY - lastY;
-          let newWidth = Math.max(200, startWidth + dx);
-          let newHeight = Math.max(200, startHeight + dy);
-          wrapper.style.width = newWidth + 'px';
-          wrapper.style.height = newHeight + 'px';
-          // Resize iframe too
-          const iframe = wrapper.querySelector('iframe');
-          if (iframe) {
-            iframe.style.width = (newWidth - 2) + 'px';
-            iframe.style.height = (newHeight - 2) + 'px';
-          }
-        });
-
-        document.addEventListener('mouseup', function(e) {
-          if (isResizing) {
-            isResizing = false;
-            document.body.style.cursor = '';
-          }
-        });
-      });
-    </script>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js"></script>
   </head>
   <body>
-    <div id="skyrimnet-ui" class="wrapper">
-      <iframe
-        src="http://localhost:8080"
-        style="border: none; border-radius: 1px; width: 100%; height: 100%;"
-        width="1078"
-        height="1323"
-      ></iframe>
+    <div id="top-menu" class="top-menu hidden">
+      <button class="menu-button gamemaster-button" onclick="onGameMasterClick()">
+        <span>GameMaster</span>
+        <span id="gamemaster-status" class="gamemaster-status status-disabled">🔴 Agent Disabled</span>
+      </button>
+      <button id="config-btn" class="menu-button" onclick="switchToConfiguration()">Configuration</button>
+      <button id="help-btn" class="menu-button" onclick="switchToHelp()">Help</button>
+    </div>
+
+    <div id="skyrimnet-ui" class="wrapper hidden">
+      <div class="navbar">
+        <div class="navbar-title">SkyrimNet UI</div>
+        <div class="navbar-buttons">
+          <div class="navbar-btn reload" onclick="reloadIframe();" title="Reload">♻</div>
+          <div class="navbar-btn help" onclick="toggleHelpPanel()" title="Help">?</div>
+          <div class="navbar-btn close" onclick="window.closePrismaUIWindow();" title="Close">×</div>
+        </div>
+      </div>
+      <div class="content-area">
+        <div class="main-iframe-container">
+          <div id="main-view" class="iframe-view visible">
+            <iframe id="skyrimnet-ui-iframe"
+              src="about:blank"
+              style="border: none; width: 100%; height: 100%;"
+            ></iframe>
+          </div>
+          <div id="help-view" class="iframe-view hidden">
+            <iframe
+              src="https://goncalo22.github.io/SkyrimNet-GamePlugin/Features/overview"
+              style="border: none; width: 100%; height: 100%;"
+            ></iframe>
+          </div>
+        </div>
+      </div>
       <div class="resize-handle"></div>
     </div>
   </body>

@@ -1,8 +1,14 @@
 
+
+
+
+
+-----
+
 ### Example to load the SkyrimNet WebUI inside Skyrim using PrismaUI
 
 
-Currently set to use F4 and hardcoded in main.cpp
+Currently set to use F4 and hardcoded in UIBridge.cpp
 `const uint32_t TOGGLE_FOCUS_KEY = 0x3E; // F4 key`
 
 ### to build:
@@ -13,7 +19,7 @@ Currently a "debug" version is compiled. change `xmake.lua` (lines with comments
 An archive file should be created in the "release" folder. This can be installed as a mod.
 
 ### REQUIREMENTS:
-Also needed is "PrismaUI_1_0_0.zip" from https://github.com/PrismaUI-SKSE/PrismaUI-Wiki/releases
+Also needed is "PrismaUI_1_0_0.zip" from https://github.com/PrismaUI-SKSE/framework
 
 Do NOT install this zip file.
 This zip needs to be extracted first.

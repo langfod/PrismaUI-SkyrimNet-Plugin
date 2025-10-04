@@ -1,0 +1,234 @@
+* {
+  user-select: none;
+  font-family: sans-serif;
+}
+
+body {
+  position: relative; /* Essential for absolute positioning of child */
+  min-height: 100vh;
+  margin: 0;
+  background: rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  background-color: transparent;
+}
+
+.top-menu {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  gap: 10px;
+  background: rgba(0, 0, 0, 0.85);
+  padding: 10px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+  z-index: 10;
+  transition: opacity 0.3s ease;
+  pointer-events: auto; /* Allow clicks on menu itself */
+}
+
+.top-menu.visible {
+  display: flex;
+  opacity: 1;
+}
+
+.top-menu.hidden {
+  display: none;
+  opacity: 0;
+}
+
+.menu-button {
+  padding: 8px 16px;
+  background: linear-gradient(to bottom, #3a3a3a, #2a2a2a);
+  color: #22c55e;
+  border: 1px solid #555;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 14px;
+  transition: all 0.2s;
+  min-width: 120px;
+  text-align: center;
+}
+
+.menu-button:hover {
+  background: linear-gradient(to bottom, #4a4a4a, #3a3a3a);
+  border-color: #22c55e;
+}
+
+.menu-button:active {
+  background: linear-gradient(to bottom, #2a2a2a, #1a1a1a);
+  transform: scale(0.95);
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
+}
+
+.menu-button.active {
+  background: linear-gradient(to bottom, #22c55e, #16a34a);
+  color: #000;
+  border-color: #22c55e;
+}
+
+.gamemaster-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.gamemaster-status {
+  font-size: 11px;
+  font-weight: normal;
+}
+
+.status-ready {
+  color: #22c55e;
+}
+
+.status-disabled {
+  color: #ff5555;
+}
+
+.wrapper {
+  display: inline-block;
+  padding: 0;
+  z-index: 5; /* Lower than menu but above background */
+  background-color: rgb(0, 0, 0);
+  color: rgb(34, 197, 94);
+  border-radius: 4px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  resize: none;
+  width: 60vw;
+  height: 60vh;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  transition: opacity 0.3s ease;
+}
+
+.wrapper.dragged {
+  /* Remove centering transform once user has dragged */
+  transform: none;
+  top: auto;
+  left: auto;
+}
+
+.wrapper.visible {
+  display: inline-block;
+  opacity: 1;
+}
+
+.wrapper.hidden {
+  display: none;
+  opacity: 0;
+}
+
+.navbar {
+  height: 30px;
+  background: linear-gradient(to bottom, #f0f0f0, #d0d0d0);
+  border-bottom: 1px solid #999;
+  border-radius: 4px 4px 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+  cursor: move;
+  user-select: none;
+}
+
+.navbar-title {
+  font-size: 13px;
+  font-weight: bold;
+  color: #333;
+  flex: 1;
+}
+
+.navbar-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.navbar-btn {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1px solid #666;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: bold;
+  color: #333;
+  transition: background 0.2s;
+}
+
+.navbar-btn:hover {
+  background: #e0e0e0;
+}
+
+.navbar-btn.close:hover {
+  background: #ff5555;
+  color: white;
+  border-color: #cc0000;
+}
+
+.content-area {
+  position: relative;
+  width: 100%;
+  height: calc(100% - 30px);
+  display: flex;
+}
+
+.main-iframe-container {
+  flex: 1;
+  position: relative;
+}
+
+.iframe-view {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: opacity 0.3s ease;
+}
+
+.iframe-view.hidden {
+  opacity: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.iframe-view.visible {
+  opacity: 1;
+  pointer-events: auto;
+  z-index: 100;
+}
+
+.resize-handle {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 16px;
+  height: 16px;
+  background: rgba(0,0,0,0.2);
+  border-radius: 3px;
+  cursor: se-resize;
+  z-index: 10;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+.resize-handle:after {
+  content: '';
+  display: block;
+  width: 12px;
+  height: 12px;
+  border-right: 2px solid #888;
+  border-bottom: 2px solid #888;
+  border-radius: 2px;
+  margin: 2px;
+}
