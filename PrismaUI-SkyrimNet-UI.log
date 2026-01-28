@@ -1,0 +1,57 @@
+[2026-01-27 05:57:33.745] [info] [44404] [main.cpp:24] PrismaUI-SkyrimNet-UI v1-0-0-0
+[2026-01-27 05:57:33.745] [info] [44404] [main.cpp:25]   built using CommonLibSSE-NG v
+[2026-01-27 05:57:33.745] [info] [44404] [main.cpp:26]   Running on Skyrim v1-6-1170-0
+[2026-01-27 05:59:09.050] [info] [15032] [keyhandler.cpp:14] KeyHandler sink registered successfully.
+[2026-01-27 05:59:09.050] [info] [15032] [UIBridge.cpp:39] KeyHandler initialized: 0x7ff8c46d6c78
+[2026-01-27 05:59:09.050] [info] [15032] [UIBridge.cpp:57] Creating PrismaUI view with path: 'PrismaUI-SkyrimNet-UI/index.html'.
+[2026-01-27 05:59:09.052] [info] [15032] [UIBridge.cpp:73] View [12561314238037863763] creation requested successfully.
+[2026-01-27 05:59:09.052] [info] [15032] [keyhandler.cpp:37] Registering callback with handle 1 for key 0x3E, event type DOWN
+[2026-01-27 05:59:09.052] [info] [15032] [UIBridge.cpp:106] F4 toggle key handler registered with handle 1
+[2026-01-27 05:59:09.052] [info] [15032] [keyhandler.cpp:37] Registering callback with handle 2 for key 0x41, event type DOWN
+[2026-01-27 05:59:09.052] [info] [15032] [UIBridge.cpp:113] F7 inspector key handler registered with handle 2
+[2026-01-27 05:59:09.052] [info] [15032] [UIBridge.cpp:121] UI initialized successfully
+[2026-01-27 05:59:32.097] [info] [44404] [UIBridge.cpp:61] View DOM is ready. v=12561314238037863763, g_view=12561314238037863763
+[2026-01-27 05:59:32.098] [info] [44404] [UIBridge.cpp:61] View DOM is ready. v=12561314238037863763, g_view=12561314238037863763
+[2026-01-27 05:59:32.098] [info] [44404] [UIBridge.cpp:61] View DOM is ready. v=12561314238037863763, g_view=12561314238037863763
+[2026-01-27 05:59:32.098] [info] [44404] [UIBridge.cpp:61] View DOM is ready. v=12561314238037863763, g_view=12561314238037863763
+[2026-01-27 06:02:40.802] [info] [44404] [UIBridge.cpp:132] ToggleView called with g_view = [12561314238037863763], g_prismaUI = 0x7ff8c458ac20
+[2026-01-27 06:02:40.802] [info] [44404] [UIBridge.cpp:140] About to call IsValid on view [12561314238037863763]...
+[2026-01-27 06:02:40.803] [info] [44404] [UIBridge.cpp:142] IsValid returned: true
+[2026-01-27 06:02:40.803] [info] [44404] [UIBridge.cpp:149] Current view value before toggle: '12561314238037863763'
+[2026-01-27 06:02:40.803] [info] [44404] [UIBridge.cpp:212] Requesting inspector view for SkyrimNet UI.
+[2026-01-27 06:02:40.805] [info] [44404] [UIBridge.cpp:225] Inspector view initialized with default placement.
+[2026-01-27 06:02:40.805] [info] [44404] [GameMasterController.cpp:32] Started GameMaster status polling
+[2026-01-27 06:02:40.805] [info] [44404] [UIBridge.cpp:160] Called InteropCall show to 'skyrimnet-ui' div. GameMaster polling started.
+[2026-01-27 06:02:40.810] [info] [17792] [GameMasterController.cpp:53] Poll: Received GameMaster status response: {"gamemaster":{"agent_enabled":true,"continuous_scene_mode":false,"cooldown":{"active":true,"continuous_seconds":15,"normal_seconds":30,"remaining_seconds":30},"game_paused":true,"initialized":true,"whisper_mode":false}}
+[2026-01-27 06:02:40.810] [info] [17792] [GameMasterController.cpp:57] Poll: ParseStatus=true, previousState=false, enabled_.load()=false
+[2026-01-27 06:02:40.810] [info] [17792] [GameMasterController.cpp:63] Poll: State changed from false to true, calling UpdateUI(true)
+[2026-01-27 06:02:40.810] [info] [17792] [GameMasterController.cpp:112] UpdateUI called with enabled=true
+[2026-01-27 06:02:40.810] [info] [17792] [UIBridge.cpp:179] UIBridge::UpdateGameMasterStatus called with enabled=true
+[2026-01-27 06:02:40.810] [info] [17792] [UIBridge.cpp:189] UIBridge::UpdateGameMasterStatus: Calling InteropCall with 'true'
+[2026-01-27 06:02:40.810] [info] [17792] [UIBridge.cpp:193] UIBridge::UpdateGameMasterStatus: InteropCall completed
+[2026-01-27 06:02:40.810] [info] [17792] [GameMasterController.cpp:114] UpdateUI: UI::UpdateGameMasterStatus(true) completed
+[2026-01-27 06:02:45.832] [info] [17792] [GameMasterController.cpp:53] Poll: Received GameMaster status response: {"gamemaster":{"agent_enabled":true,"continuous_scene_mode":false,"cooldown":{"active":true,"continuous_seconds":15,"normal_seconds":30,"remaining_seconds":30},"game_paused":true,"initialized":true,"whisper_mode":false}}
+[2026-01-27 06:02:45.832] [info] [17792] [GameMasterController.cpp:57] Poll: ParseStatus=true, previousState=true, enabled_.load()=true
+[2026-01-27 06:02:45.832] [info] [17792] [GameMasterController.cpp:67] Poll: State unchanged (true), skipping UpdateUI
+[2026-01-27 06:02:50.865] [info] [17792] [GameMasterController.cpp:53] Poll: Received GameMaster status response: {"gamemaster":{"agent_enabled":true,"continuous_scene_mode":false,"cooldown":{"active":true,"continuous_seconds":15,"normal_seconds":30,"remaining_seconds":30},"game_paused":true,"initialized":true,"whisper_mode":false}}
+[2026-01-27 06:02:50.865] [info] [17792] [GameMasterController.cpp:57] Poll: ParseStatus=true, previousState=true, enabled_.load()=true
+[2026-01-27 06:02:50.865] [info] [17792] [GameMasterController.cpp:67] Poll: State unchanged (true), skipping UpdateUI
+[2026-01-27 06:02:52.088] [info] [44404] [UIBridge.cpp:61] View DOM is ready. v=12561314238037863763, g_view=12561314238037863763
+[2026-01-27 06:02:53.527] [info] [44404] [UIBridge.cpp:132] ToggleView called with g_view = [12561314238037863763], g_prismaUI = 0x7ff8c458ac20
+[2026-01-27 06:02:53.527] [info] [44404] [UIBridge.cpp:140] About to call IsValid on view [12561314238037863763]...
+[2026-01-27 06:02:53.527] [info] [44404] [UIBridge.cpp:142] IsValid returned: true
+[2026-01-27 06:02:53.527] [info] [44404] [UIBridge.cpp:149] Current view value before toggle: '12561314238037863763'
+[2026-01-27 06:02:53.583] [info] [44404] [GameMasterController.cpp:44] Stopped GameMaster status polling
+[2026-01-27 06:02:53.583] [info] [44404] [UIBridge.cpp:173] Called InteropCall hide to 'skyrimnet-ui' div. GameMaster polling stopped.
+[2026-01-27 06:02:56.150] [info] [44404] [UIBridge.cpp:132] ToggleView called with g_view = [12561314238037863763], g_prismaUI = 0x7ff8c458ac20
+[2026-01-27 06:02:56.150] [info] [44404] [UIBridge.cpp:140] About to call IsValid on view [12561314238037863763]...
+[2026-01-27 06:02:56.150] [info] [44404] [UIBridge.cpp:142] IsValid returned: true
+[2026-01-27 06:02:56.150] [info] [44404] [UIBridge.cpp:149] Current view value before toggle: '12561314238037863763'
+[2026-01-27 06:02:56.150] [info] [44404] [GameMasterController.cpp:32] Started GameMaster status polling
+[2026-01-27 06:02:56.150] [info] [44404] [UIBridge.cpp:160] Called InteropCall show to 'skyrimnet-ui' div. GameMaster polling started.
+[2026-01-27 06:02:56.152] [info] [34324] [GameMasterController.cpp:53] Poll: Received GameMaster status response: {"gamemaster":{"agent_enabled":true,"continuous_scene_mode":false,"cooldown":{"active":true,"continuous_seconds":15,"normal_seconds":30,"remaining_seconds":30},"game_paused":true,"initialized":true,"whisper_mode":false}}
+[2026-01-27 06:02:56.152] [info] [34324] [GameMasterController.cpp:57] Poll: ParseStatus=true, previousState=true, enabled_.load()=true
+[2026-01-27 06:02:56.152] [info] [34324] [GameMasterController.cpp:67] Poll: State unchanged (true), skipping UpdateUI
+[2026-01-27 06:03:01.179] [info] [34324] [GameMasterController.cpp:53] Poll: Received GameMaster status response: {"gamemaster":{"agent_enabled":true,"continuous_scene_mode":false,"cooldown":{"active":true,"continuous_seconds":15,"normal_seconds":30,"remaining_seconds":30},"game_paused":true,"initialized":true,"whisper_mode":false}}
+[2026-01-27 06:03:01.179] [info] [34324] [GameMasterController.cpp:57] Poll: ParseStatus=true, previousState=true, enabled_.load()=true
+[2026-01-27 06:03:01.179] [info] [34324] [GameMasterController.cpp:67] Poll: State unchanged (true), skipping UpdateUI

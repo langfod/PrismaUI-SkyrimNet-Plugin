@@ -1,1 +1,0 @@
-- Installation manual page: https://github.com/PrismaUI-SKSE/PrismaUI-Wiki/wiki#integration

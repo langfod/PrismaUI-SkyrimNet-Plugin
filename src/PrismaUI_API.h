@@ -46,7 +46,7 @@ namespace PRISMA_UI_API
 		virtual bool HasFocus(PrismaView view) noexcept = 0;
 
 		// Set focus on view.
-		virtual bool Focus(PrismaView view, bool pauseGame = false) noexcept = 0;
+		virtual bool Focus(PrismaView view, bool pauseGame = false, bool disableFocusMenu = false) noexcept = 0;
 
 		// Remove focus from view.
 		virtual void Unfocus(PrismaView view) noexcept = 0;
@@ -89,19 +89,24 @@ namespace PRISMA_UI_API
 
 		// Set inspector window position and size.
 		virtual void SetInspectorBounds(PrismaView view, float topLeftX, float topLeftY, unsigned int width, unsigned int height) noexcept = 0;
+
+		// Returns true if any view has active focus.
+		virtual bool HasAnyActiveFocus() noexcept = 0;
 	};
 
 	typedef void* (*_RequestPluginAPI)(const InterfaceVersion interfaceVersion);
 
-	/// <summary>
+
 	/// Request the PrismaUI API interface.
 	/// Recommended: Send your request during or after SKSEMessagingInterface::kMessage_PostLoad to make sure the dll has already been loaded
-	/// </summary>
-	/// <param name="a_interfaceVersion">The interface version to request</param>
-	/// <returns>The pointer to the API singleton, or nullptr if request failed</returns>
+
 	[[nodiscard]] inline void* RequestPluginAPI(const InterfaceVersion a_interfaceVersion = InterfaceVersion::V1)
 	{
-		auto pluginHandle = GetModuleHandle("PrismaUI.dll");
+		auto pluginHandle = GetModuleHandle(L"PrismaUI.dll"); // if you're getting the wchar error then just replace it by `GetModuleHandle("PrismaUI.dll");`
+		if (!pluginHandle) {
+			return nullptr;
+		}
+
 		_RequestPluginAPI requestAPIFunction = (_RequestPluginAPI)GetProcAddress(pluginHandle, "RequestPluginAPI");
 
 		if (requestAPIFunction) {

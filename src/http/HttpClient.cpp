@@ -92,10 +92,19 @@ std::string Get(const std::wstring& url) {
   return response;
 }
 
+// Helper to convert wstring to string for logging (ASCII-safe URLs only)
+static std::string WideToNarrow(const std::wstring& wide) {
+  if (wide.empty()) return {};
+  int size = WideCharToMultiByte(CP_UTF8, 0, wide.data(), (int)wide.size(), nullptr, 0, nullptr, nullptr);
+  std::string result(size, 0);
+  WideCharToMultiByte(CP_UTF8, 0, wide.data(), (int)wide.size(), result.data(), size, nullptr, nullptr);
+  return result;
+}
+
 bool Post(const std::wstring& url, const std::string& jsonData) {
   std::lock_guard<std::mutex> lock(httpMutex);
   
-  logger::info("POST Request - URL: {}", std::string(url.begin(), url.end()));
+  logger::info("POST Request - URL: {}", WideToNarrow(url));
   logger::info("POST Request - Payload: {}", jsonData);
   
   HINTERNET hSession = WinHttpOpen(L"SkyrimNet/1.0",

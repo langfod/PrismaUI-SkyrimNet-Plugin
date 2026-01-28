@@ -15,8 +15,16 @@ static void SKSEMessageHandler(SKSE::MessagingInterface::Message* message) {
 // SKSE plugin entry point
 extern "C" DLLEXPORT bool SKSEAPI
 SKSEPlugin_Load(const SKSE::LoadInterface* a_skse) {
-  REL::Module::reset();
+  //REL::Module::reset();
+  SKSE::Init(a_skse, false); // false = don't initialize logger by default
+  logger::init();
+  // pattern: [2024-01-01 12:00:00.000] [info] [1234] [sourcefile.cpp:123] Log message
+  spdlog::set_pattern("[%Y-%m-%d %T.%e] [%l] [%t] [%s:%#] %v");
 
+  logger::info("{} v{}", Plugin::NAME, Plugin::VERSION.string());
+  logger::info("  built using CommonLibSSE-NG v{}", COMMONLIBSSE_VERSION);
+  logger::info("  Running on Skyrim v{}", REL::Module::get().version().string());
+  
   auto g_messaging = reinterpret_cast<SKSE::MessagingInterface*>(
       a_skse->QueryInterface(SKSE::LoadInterface::kMessaging));
 
@@ -25,9 +33,6 @@ SKSEPlugin_Load(const SKSE::LoadInterface* a_skse) {
     return false;
   }
 
-  logger::info("{} v{}", Plugin::NAME, Plugin::VERSION.string());
-
-  SKSE::Init(a_skse);
   SKSE::AllocTrampoline(1 << 10);
 
   g_messaging->RegisterListener("SKSE", SKSEMessageHandler);

@@ -1,0 +1,67 @@
+[2026-01-27 05:57:33.746] [info] [44404] [main.cpp:23] ---------------- PrismaUI 1-2-0-0 by StarkMP <discord: starkmp> ----------------
+[2026-01-27 05:57:33.746] [info] [44404] [main.cpp:24] -------------------- Docs and Guides: https://prismaui.dev -------------------
+[2026-01-27 05:57:33.746] [info] [44404] [main.cpp:25] ------------------- built using CommonLibSSE-NG v4.1.1 -------------------
+[2026-01-27 05:57:33.746] [info] [44404] [main.cpp:26] ------------------- Running on Skyrim v1-6-1170-0 -------------------
+[2026-01-27 05:57:33.746] [info] [44404] [DllLoader.h:73] Loaded Ultralight DLL: UltralightCore.dll
+[2026-01-27 05:57:33.752] [info] [44404] [DllLoader.h:73] Loaded Ultralight DLL: WebCore.dll
+[2026-01-27 05:57:33.752] [info] [44404] [DllLoader.h:73] Loaded Ultralight DLL: Ultralight.dll
+[2026-01-27 05:57:33.753] [info] [44404] [DllLoader.h:73] Loaded Ultralight DLL: AppCore.dll
+[2026-01-27 05:57:33.753] [info] [44404] [DllLoader.h:77] All Ultralight DLLs loaded successfully from: D:\SteamLibrary\steamapps\common\Skyrim Special Edition\Data\PrismaUI\libs
+[2026-01-27 05:59:09.050] [info] [15032] [main.cpp:55] RequestPluginAPI returned the API singleton
+[2026-01-27 05:59:09.050] [info] [15032] [Core.cpp:97] Initializing PrismaUI Core System...
+[2026-01-27 05:59:09.050] [info] [15032] [Core.cpp:142] D3D Present hook installed.
+[2026-01-27 05:59:09.052] [info] [42764] [Core.cpp:120] Ultralight Platform configured and Renderer created on UI thread.
+[2026-01-27 05:59:09.052] [info] [15032] [Core.cpp:136] PrismaUI Core System Initialized. Base Path D:\SteamLibrary\steamapps\common\Skyrim Special Edition\Data\PrismaUI
+[2026-01-27 05:59:09.052] [info] [15032] [ViewManager.cpp:59] View [12561314238037863763] creation requested for path: file:///views/PrismaUI-SkyrimNet-UI/index.html with order <0>. Actual view will be created by UI thread.
+[2026-01-27 05:59:09.066] [info] [25748] [InputHandler.cpp:164] PrismaUI::InputHandler Initialized with HWND: 0x2d03e0
+[2026-01-27 05:59:09.066] [info] [25748] [InputHandler.cpp:169] MouseEventListener registered with BSInputDeviceManager
+[2026-01-27 05:59:09.066] [info] [25748] [InputHandler.cpp:178] PrismaUI::InputHandler Original WndProc set.
+[2026-01-27 05:59:09.066] [info] [25748] [Core.cpp:184] DirectXTK SpriteBatch and CommonStates (re)initialized.
+[2026-01-27 05:59:09.067] [info] [25748] [Core.cpp:196] Cursor texture loaded successfully.
+[2026-01-27 05:59:09.067] [info] [42764] [Core.cpp:281] UI Thread: Creating View [12561314238037863763] for path: file:///views/PrismaUI-SkyrimNet-UI/index.html
+[2026-01-27 05:59:09.076] [info] [42764] [Listeners.cpp:15] View [12561314238037863763]: LoadListener: Begin loading URL: file:///views/PrismaUI-SkyrimNet-UI/index.html
+[2026-01-27 05:59:09.076] [info] [42764] [Core.cpp:312] UI Thread: View [12561314238037863763] successfully created and loading URL.
+[2026-01-27 05:59:09.084] [info] [42764] [Listeners.cpp:49] View [12561314238037863763]: LoadListener: Window object ready.
+[2026-01-27 05:59:09.093] [info] [42764] [Listeners.cpp:69] View [12561314238037863763]: JSConsole: [Inspector] Tab preference cleared (was:
+[2026-01-27 05:59:09.093] [info] [42764] [Listeners.cpp:53] View [12561314238037863763]: LoadListener: DOM ready.
+[2026-01-27 05:59:09.100] [info] [42764] [Listeners.cpp:53] View [12561314238037863763]: LoadListener: DOM ready.
+[2026-01-27 05:59:09.368] [info] [42764] [Listeners.cpp:49] View [12561314238037863763]: LoadListener: Window object ready.
+[2026-01-27 05:59:09.439] [info] [42764] [Listeners.cpp:53] View [12561314238037863763]: LoadListener: DOM ready.
+[2026-01-27 05:59:09.635] [info] [42764] [Listeners.cpp:69] View [12561314238037863763]: JSConsole: Help iframe loaded
+[2026-01-27 05:59:09.636] [info] [42764] [Listeners.cpp:26] View [12561314238037863763]: LoadListener: Finished loading URL: file:///views/PrismaUI-SkyrimNet-UI/index.html
+[2026-01-27 05:59:11.365] [info] [42764] [Listeners.cpp:69] View [12561314238037863763]: JSConsole: Waiting for localhost server...
+[2026-01-27 05:59:15.631] [info] [42764] [Listeners.cpp:69] View [12561314238037863763]: JSConsole: Waiting for localhost server...
+[2026-01-27 05:59:19.898] [info] [42764] [Listeners.cpp:69] View [12561314238037863763]: JSConsole: Waiting for localhost server...
+[2026-01-27 05:59:24.164] [info] [42764] [Listeners.cpp:69] View [12561314238037863763]: JSConsole: Waiting for localhost server...
+[2026-01-27 05:59:26.693] [info] [42764] [Listeners.cpp:69] View [12561314238037863763]: JSConsole: Localhost server is ready
+[2026-01-27 05:59:26.706] [info] [42764] [Listeners.cpp:15] View [12561314238037863763]: LoadListener: Begin loading URL: http://localhost:8080/config
+[2026-01-27 05:59:26.794] [info] [42764] [Listeners.cpp:49] View [12561314238037863763]: LoadListener: Window object ready.
+[2026-01-27 05:59:27.063] [info] [42764] [Listeners.cpp:53] View [12561314238037863763]: LoadListener: DOM ready.
+[2026-01-27 05:59:27.063] [info] [42764] [Listeners.cpp:69] View [12561314238037863763]: JSConsole: Main iframe loaded successfully:
+[2026-01-27 05:59:27.063] [info] [42764] [Listeners.cpp:26] View [12561314238037863763]: LoadListener: Finished loading URL: http://localhost:8080/config
+[2026-01-27 05:59:27.101] [info] [42764] [Listeners.cpp:69] View [12561314238037863763]: JSConsole: Rendering ConfigPage
+[2026-01-27 05:59:32.098] [info] [42764] [Listeners.cpp:69] View [12561314238037863763]: JSConsole: [IFrame] Sent PAUSE message to iframe
+[2026-01-27 05:59:32.098] [info] [42764] [Listeners.cpp:69] View [12561314238037863763]: JSConsole: [IFrame] Sent PAUSE message to iframe
+[2026-01-27 05:59:32.098] [info] [42764] [Listeners.cpp:69] View [12561314238037863763]: JSConsole: [IFrame] Sent PAUSE message to iframe
+[2026-01-27 05:59:32.098] [info] [42764] [Listeners.cpp:69] View [12561314238037863763]: JSConsole: [IFrame] Sent PAUSE message to iframe
+[2026-01-27 06:02:40.803] [info] [44404] [Inspector.cpp:37] Ultralight inspector assets detected at D:\SteamLibrary\steamapps\common\Skyrim Special Edition\Data\PrismaUI\inspector\Main.html
+[2026-01-27 06:02:40.803] [info] [42764] [Listeners.cpp:73] View [12561314238037863763]: ViewListener: OnCreateInspectorView called (is_local=true, URL=file:///views/PrismaUI-SkyrimNet-UI/index.html)
+[2026-01-27 06:02:40.803] [info] [42764] [Listeners.cpp:94] View [12561314238037863763]: Inspector view created with size 800x600
+[2026-01-27 06:02:40.805] [info] [44404] [Inspector.cpp:145] View [12561314238037863763]: Inspector creation requested.
+[2026-01-27 06:02:40.805] [info] [44404] [Inspector.cpp:262] View [12561314238037863763]: Inspector bounds set to (48, 48) with size 1200x640
+[2026-01-27 06:02:40.805] [info] [44404] [Inspector.cpp:200] View [12561314238037863763]: Inspector visibility set to false.
+[2026-01-27 06:02:40.880] [info] [42764] [Listeners.cpp:69] View [12561314238037863763]: JSConsole: [GameMaster] updateGameMasterStatus called with:
+[2026-01-27 06:02:40.880] [info] [42764] [Listeners.cpp:69] View [12561314238037863763]: JSConsole: [GameMaster] Converted to boolean:
+[2026-01-27 06:02:40.880] [info] [42764] [Listeners.cpp:69] View [12561314238037863763]: JSConsole: [GameMaster] UI updated to: Ready
+[2026-01-27 06:02:43.502] [info] [42764] [Listeners.cpp:69] View [12561314238037863763]: JSConsole: [IFrame] Sent RESUME message to iframe
+[2026-01-27 06:02:52.006] [info] [42764] [Listeners.cpp:15] View [12561314238037863763]: LoadListener: Begin loading URL: http://localhost:8080/logs
+[2026-01-27 06:02:52.026] [info] [42764] [Listeners.cpp:49] View [12561314238037863763]: LoadListener: Window object ready.
+[2026-01-27 06:02:52.084] [info] [42764] [Listeners.cpp:53] View [12561314238037863763]: LoadListener: DOM ready.
+[2026-01-27 06:02:52.084] [info] [42764] [Listeners.cpp:69] View [12561314238037863763]: JSConsole: Main iframe loaded successfully:
+[2026-01-27 06:02:52.084] [info] [42764] [Listeners.cpp:26] View [12561314238037863763]: LoadListener: Finished loading URL: http://localhost:8080/logs
+[2026-01-27 06:02:52.088] [info] [42764] [Listeners.cpp:69] View [12561314238037863763]: JSConsole: [IFrame] Sent PAUSE message to iframe
+[2026-01-27 06:02:52.110] [info] [42764] [Listeners.cpp:69] View [12561314238037863763]: JSConsole: Rendering Logs
+[2026-01-27 06:02:53.583] [info] [42764] [Listeners.cpp:69] View [12561314238037863763]: JSConsole: [IFrame] Sent PAUSE message to iframe
+[2026-01-27 06:02:59.380] [info] [42764] [Listeners.cpp:69] View [12561314238037863763]: JSConsole: [IFrame] Sent RESUME message to iframe
+[2026-01-27 06:03:04.187] [info] [42764] [Listeners.cpp:15] View [12561314238037863763]: LoadListener: Begin loading URL: http://localhost:8080/game-data
+[2026-01-27 06:03:04.201] [critical] [42764] [Core.cpp:336] UI Thread: SEH Exception in render loop: Access Violation (write at 0x00000268538CE740) at address 0x0x268538ce740

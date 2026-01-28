@@ -353,6 +353,21 @@ function setupIframeErrorHandlers() {
           // Record navigation time for rate limiting (Ultralight WebCore crash workaround)
           lastNavigationTime = Date.now();
 
+          // WORKAROUND: Detect navigation to root URL which can crash Ultralight
+          // Redirect to /config instead
+          try {
+            const currentUrl = doc?.location?.href;
+            if (currentUrl === 'http://localhost:8080/' || currentUrl === 'http://localhost:8080') {
+              console.warn('[Navigation] Detected root URL navigation - redirecting to /config to prevent crash');
+              setTimeout(() => {
+                mainIframe.src = 'http://localhost:8080/config';
+              }, 100);
+              return;
+            }
+          } catch (e) {
+            // Cross-origin, can't check
+          }
+
           // Monitor iframe for navigation attempts that might break out
           try {
             if (doc && doc.location.href.startsWith('http://localhost')) {

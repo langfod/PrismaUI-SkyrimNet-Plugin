@@ -7,7 +7,7 @@ body {
   position: relative; /* Essential for absolute positioning of child */
   min-height: 100vh;
   margin: 0;
-  background: rgba(0, 0, 0, 0.1);
+  /* background: rgba(0, 0, 0, 0.1); */
   overflow: hidden;
   background-color: transparent;
 }

@@ -11,24 +11,9 @@
 Currently set to use F4 and hardcoded in UIBridge.cpp
 `const uint32_t TOGGLE_FOCUS_KEY = 0x3E; // F4 key`
 
-### to build:
-* run `xmake build`
-
-Currently a "debug" version is compiled. change `xmake.lua` (lines with comments of " -- debug")
-
-An archive file should be created in the "release" folder. This can be installed as a mod.
 
 ### REQUIREMENTS:
-Also needed is "PrismaUI_1_0_0.zip" from https://github.com/PrismaUI-SKSE/framework
-
-Do NOT install this zip file.
-This zip needs to be extracted first.
-Install the archive from either the "INSTALL WITH MO2" or "DEBUG VERSION" folders as a normal mod.
-
-The folder "PUT FILES IN SKYRIM FOLDER" contain files that need to go in the game root folder.
-
-Rename (perhaps PrismUI-Ultralight) and install this folder as a normal mod in Vortex and set the type to "Engine Injector" to install in game folder.
-
+Also needed is "PrismaUI_1_2_0.zip" from https://github.com/PrismaUI-SKSE/framework
 
 ### Notes:
 in main.cpp
