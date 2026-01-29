@@ -8,6 +8,10 @@
     {
       "name": "spdlog",
       "features": ["wchar"]
+    },
+    {
+      "name": "cpp-httplib",
+      "features": ["zlib", "brotli", "openssl"]
     }
   ]
 }

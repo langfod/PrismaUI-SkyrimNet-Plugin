@@ -1,7 +1,6 @@
 cmake_minimum_required(VERSION 4.1)
+add_definitions(-D_WIN32_WINNT=0x0A00)
 option(PRISMAUI_ENABLE_INSPECTOR "Enable PrismaUI Inspector" ON)
-
-
 
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -22,30 +21,30 @@ list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake")
 set(BUILD_ROOT "${CMAKE_SOURCE_DIR}/build")
 # Include compiler flags configuration
 include(CompilerFlags)
+
+# find vcpkg packages
+find_package(httplib CONFIG REQUIRED)
+
+# Include External Dependencies configuration
 include(ExternalDependencies)
 
-
-# Collect source files
-file(GLOB_RECURSE SOURCES
-    "src/*.cpp"
-    "src/*.h"
-)
-
-# Create source groups for IDE
-source_group(
-    TREE "${CMAKE_CURRENT_SOURCE_DIR}/src"
-    PREFIX "Source Files"
-    FILES ${SOURCES}
-)
+# Add include directories
+include_directories(${CMAKE_SOURCE_DIR}/include)
+include_directories(${CMAKE_BINARY_DIR}/include)
 
 # Add the plugin using CommonLibSSE function
 add_commonlibsse_plugin(${PROJECT_NAME}
     NAME "PrismaUI-SkyrimNet-UI"
     AUTHOR "SkyrimNet Community"
     USE_ADDRESS_LIBRARY
-    MINIMUM_SKSE_VERSION "2.0.1.04"
+    MINIMUM_SKSE_VERSION "2.0.12"
     VERSION ${PROJECT_VERSION}
-    SOURCES ${SOURCES}
+    SOURCES
+    src/main.cpp
+    src/ui/UIBridge.cpp
+    src/skyrimnet/GameMasterController.cpp
+    src/keyhandler/keyhandler.cpp
+    src/http/HttpClient.cpp
 )
 
 # Include directories
@@ -54,17 +53,16 @@ target_include_directories(${PROJECT_NAME}
     "${CMAKE_CURRENT_SOURCE_DIR}/src"
 )
 
-
-
 # Required for delay loading
 target_link_libraries(${PROJECT_NAME}
     PRIVATE
     delayimp
+    httplib::httplib
 )
 # Precompiled header
 target_precompile_headers(${PROJECT_NAME}
     PRIVATE
-    "src/PCH.h"
+    "include/PCH.h"
 )
 link_external_dependencies(${PROJECT_NAME})
 
